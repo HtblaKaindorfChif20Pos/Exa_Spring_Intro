@@ -18,6 +18,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Pet.findAllByPettype", query = "SELECT p FROM Pet p WHERE p.petType = :petType"),
+    @NamedQuery(name="Pet.findByName", query = "SELECT p FROM Pet p WHERE p.name LIKE :petName")
+})
 public class Pet implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)

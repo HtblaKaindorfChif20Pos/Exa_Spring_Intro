@@ -5,10 +5,12 @@ import at.kaindorf.jpaintro.pojos.PetOwner;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +29,15 @@ public class InitDatabase {
 
   @PostConstruct
   public void initPets() {
+
+    Sort sorting = Sort.by("birthdate").descending().and(Sort.by("name"));
+
+    List<Pet> list1 =  petRepo.findAll();
+    List<Pet> list2 =  petRepo.findAll(Sort.by("name").descending().and(Sort.by("birthdate")));
+    Pageable pageable = PageRequest.of(10, 5, Sort.by("name"));
+    Pageable page = PageRequest.of(1,10, sorting);
+    List<Pet> petsByType = petRepo.findAllByPettype("Cat", page);
+
     log.info("Init pets table ...");
     Pet pet1 = new Pet("garfield", "cat", LocalDate.of(2014,4,14), 3.5f);
     Pet pet2 = new Pet("odie", "dog", LocalDate.of(2016,5,18), 1.5f);
