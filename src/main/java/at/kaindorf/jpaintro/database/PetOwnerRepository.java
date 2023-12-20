@@ -20,4 +20,6 @@ public interface PetOwnerRepository extends JpaRepository<PetOwner, String> {
 
   @Query("SELECT count(o) FROM PetOwner o")
   Long countNoOfOwners();
+
+
 }

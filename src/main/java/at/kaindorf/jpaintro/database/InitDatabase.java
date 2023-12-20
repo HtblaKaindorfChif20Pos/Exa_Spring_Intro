@@ -31,7 +31,6 @@ public class InitDatabase {
   public void initPets() {
 
     Sort sorting = Sort.by("birthdate").descending().and(Sort.by("name"));
-
     List<Pet> list1 =  petRepo.findAll();
     List<Pet> list2 =  petRepo.findAll(Sort.by("name").descending().and(Sort.by("birthdate")));
     Pageable pageable = PageRequest.of(10, 5, Sort.by("name"));
