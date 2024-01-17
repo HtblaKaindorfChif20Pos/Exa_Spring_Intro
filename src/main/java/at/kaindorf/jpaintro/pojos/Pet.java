@@ -28,6 +28,7 @@ public class Pet implements Serializable {
   private Long petId;
 
   @NonNull
+  @Column()
   private String name;
   @NonNull
   @Column(length=50)

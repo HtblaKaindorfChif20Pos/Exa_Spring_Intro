@@ -41,4 +41,12 @@ public class PetOwner implements Serializable {
 //  @JoinColumn(name = "pet_id")
 //  @ToString.Exclude
 //  private Pet pet;
+
+  @ManyToMany(mappedBy = "ownerList")
+  private List<Address> addressList = new ArrayList<>();
+
+  public void addAddress(Address address) {
+    addressList.add(address);
+  }
+
 }
